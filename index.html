@@ -144,6 +144,17 @@
   .nav-cta{ display:flex; align-items:center; gap:16px; }
   .nav-cta .btn{ padding:.6em 1.2em; font-size:.85rem; }
 
+  .lang-switch{
+    display:flex; align-items:center; gap:2px; font-family:var(--font-mono); font-size:.78rem;
+    border:1px solid var(--line-strong); border-radius:2px; overflow:hidden;
+  }
+  .lang-switch button{
+    background:none; border:none; padding:.5em .7em; cursor:pointer; color:var(--ink-dim);
+    font-family:inherit; font-size:inherit; letter-spacing:.04em; transition:background .2s ease, color .2s ease;
+  }
+  .lang-switch button.active{ background:var(--accent); color:var(--accent-contrast); }
+  .lang-switch button:not(.active):hover{ color:var(--ink); }
+
   .menu-btn{ display:none; background:none; border:1px solid var(--line-strong); border-radius:2px; width:40px; height:40px; align-items:center; justify-content:center; cursor:pointer; }
   .menu-btn span, .menu-btn span::before, .menu-btn span::after{
     content:""; display:block; width:16px; height:1px; background:var(--ink); position:relative; transition:transform .25s ease, opacity .25s ease;
@@ -225,9 +236,11 @@
   /* ---------- services ---------- */
   .services{ background:var(--bg-alt); }
   .service-grid{
-    display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:1px;
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:1px;
     background:var(--line); border:1px solid var(--line);
   }
+  @media (max-width:980px){ .service-grid{ grid-template-columns:repeat(2, 1fr); } }
+  @media (max-width:520px){ .service-grid{ grid-template-columns:1fr; } }
 
   .service-card{
     background:var(--surface); padding:30px 26px; position:relative; min-height:230px;
@@ -390,14 +403,18 @@
       <span class="logo-word">START <b>BIM</b></span>
     </a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#services">Услуги</a></li>
-      <li><a href="#process">Процесс</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#contact">Контакты</a></li>
+      <li><a href="#services" data-i18n="nav.services">Услуги</a></li>
+      <li><a href="#process" data-i18n="nav.process">Процесс</a></li>
+      <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Контакты</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="#contact" class="btn btn-ghost">Контакты</a>
-      <a href="#contact" class="btn btn-primary js-open-contact">Обсудить проект <span class="btn-arrow">→</span></a>
+      <div class="lang-switch" aria-label="Язык / Language">
+        <button type="button" class="js-lang active" data-lang="ru">RU</button>
+        <button type="button" class="js-lang" data-lang="en">EN</button>
+      </div>
+      <a href="#contact" class="btn btn-ghost" data-i18n="nav.contactBtn">Контакты</a>
+      <a href="#contact" class="btn btn-primary js-open-contact" data-i18n="nav.cta">Обсудить проект <span class="btn-arrow">→</span></a>
       <button class="menu-btn" id="menu-btn" aria-label="Открыть меню" aria-expanded="false"><span></span></button>
     </div>
   </div>
@@ -409,12 +426,12 @@
     <div class="grid-labels" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div>
     <div class="container hero-grid">
       <div>
-        <div class="eyebrow hero-eyebrow">BIM/ТИМ ДЛЯ ПРОЕКТНЫХ КОМПАНИЙ</div>
-        <h1>От стандарта до модели — <em>весь путь</em> внедрения BIM.</h1>
-        <p class="hero-sub">Start BIM выстраивает переход на ТИМ целиком: стандарты, софт, CDE-среда, обучение команды и консалтинг на каждом этапе. Восемь направлений — один подрядчик.</p>
+        <div class="eyebrow hero-eyebrow" data-i18n="hero.eyebrow">BIM/ТИМ ДЛЯ ПРОЕКТНЫХ КОМПАНИЙ</div>
+        <h1 data-i18n="hero.title">От стандарта до модели — <em>весь путь</em> внедрения BIM.</h1>
+        <p class="hero-sub" data-i18n="hero.sub">Start BIM выстраивает переход на ТИМ целиком: стандарты, софт, CDE-среда, обучение команды и консалтинг на каждом этапе. Восемь направлений — один подрядчик.</p>
         <div class="hero-cta">
-          <a href="#contact" class="btn btn-primary js-open-contact">Обсудить проект <span class="btn-arrow">→</span></a>
-          <a href="#services" class="btn btn-ghost">Смотреть услуги</a>
+          <a href="#contact" class="btn btn-primary js-open-contact" data-i18n="hero.ctaPrimary">Обсудить проект <span class="btn-arrow">→</span></a>
+          <a href="#services" class="btn btn-ghost" data-i18n="hero.ctaGhost">Смотреть услуги</a>
         </div>
       </div>
       <div class="hero-visual">
@@ -439,9 +456,9 @@
   <section class="services" id="services">
     <div class="container">
       <div class="section-head" data-reveal>
-        <div class="eyebrow">Услуги // 01–08</div>
-        <h2>Восемь направлений одного внедрения</h2>
-        <p>Каждая компания входит в BIM в своей точке — кто-то с регламента, кто-то с софта. Мы закрываем весь путь целиком, от документа до алгоритма.</p>
+        <div class="eyebrow" data-i18n="services.eyebrow">Услуги // 01–08</div>
+        <h2 data-i18n="services.title">Восемь направлений одного внедрения</h2>
+        <p data-i18n="services.sub">Каждая компания входит в BIM в своей точке — кто-то с регламента, кто-то с софта. Мы закрываем весь путь целиком, от документа до алгоритма.</p>
       </div>
     </div>
 
@@ -451,64 +468,64 @@
         <article class="service-card">
           <span class="tick-bl"></span><span class="tick-br"></span>
           <span class="service-index">01</span>
-          <h3>BIM-стандарты</h3>
-          <p>Разрабатываем BEP, EIR, LOD и регламент наименования моделей — единые правила, по которым работает вся команда.</p>
+          <h3 data-i18n="svc.01.title">BIM-стандарты</h3>
+          <p data-i18n="svc.01.text">Разрабатываем BEP, EIR, LOD и регламент наименования моделей — единые правила, по которым работает вся команда.</p>
           <div class="service-tags"><span>BEP</span><span>EIR</span><span>LOD</span></div>
         </article>
 
         <article class="service-card">
           <span class="tick-bl"></span><span class="tick-br"></span>
           <span class="service-index">02</span>
-          <h3>Софт и внедрение</h3>
-          <p>Настраиваем Revit и Navisworks, шаблоны, семейства ADSK и обмен IFC под задачи конкретного отдела.</p>
+          <h3 data-i18n="svc.02.title">Софт и внедрение</h3>
+          <p data-i18n="svc.02.text">Настраиваем Revit и Navisworks, шаблоны, семейства, матрицу коллизий и обмен IFC под задачи конкретного отдела.</p>
           <div class="service-tags"><span>REVIT</span><span>NAVISWORKS</span><span>IFC</span></div>
         </article>
 
         <article class="service-card">
           <span class="tick-bl"></span><span class="tick-br"></span>
           <span class="service-index">03</span>
-          <h3>CDE-платформы</h3>
-          <p>Строим единую среду данных: сервер, структуру папок, права доступа и порядок согласования моделей.</p>
+          <h3 data-i18n="svc.03.title">CDE-платформы</h3>
+          <p data-i18n="svc.03.text">Строим единую среду данных: сервер, структуру папок, права доступа и порядок согласования моделей.</p>
           <div class="service-tags"><span>CDE</span><span>SERVER</span></div>
         </article>
 
         <article class="service-card">
           <span class="tick-bl"></span><span class="tick-br"></span>
           <span class="service-index">04</span>
-          <h3>4D | 5D BIM</h3>
-          <p>Связываем модель с графиком и сметой — сроки и объёмы работ считаются напрямую из модели.</p>
+          <h3 data-i18n="svc.04.title">4D | 5D BIM</h3>
+          <p data-i18n="svc.04.text">Связываем модель с графиком и сметой — сроки и объёмы работ считаются напрямую из модели.</p>
           <div class="service-tags"><span>4D</span><span>5D</span></div>
         </article>
 
         <article class="service-card">
           <span class="tick-bl"></span><span class="tick-br"></span>
           <span class="service-index">05</span>
-          <h3>Консалтинг и roadmap</h3>
-          <p>Формируем дорожную карту внедрения — от текущего уровня BIM-зрелости до целевой модели процессов.</p>
+          <h3 data-i18n="svc.05.title">Консалтинг и roadmap</h3>
+          <p data-i18n="svc.05.text">Формируем дорожную карту внедрения — от текущего уровня BIM-зрелости до целевой модели процессов.</p>
           <div class="service-tags"><span>ROADMAP</span></div>
         </article>
 
         <article class="service-card">
           <span class="tick-bl"></span><span class="tick-br"></span>
           <span class="service-index">06</span>
-          <h3>Обучение</h3>
-          <p>Учим проектировщиков и BIM-менеджеров работать по новым стандартам — не разово, а с сопровождением.</p>
+          <h3 data-i18n="svc.06.title">Обучение</h3>
+          <p data-i18n="svc.06.text">Учим проектировщиков и руководителей работать по новым стандартам — не разово, а с сопровождением.</p>
           <div class="service-tags"><span>TRAINING</span></div>
         </article>
 
         <article class="service-card">
           <span class="tick-bl"></span><span class="tick-br"></span>
           <span class="service-index">07</span>
-          <h3>Аудит моделей</h3>
-          <p>Проверяем модели на соответствие LOD, коллизии и правила наименования до сдачи заказчику.</p>
+          <h3 data-i18n="svc.07.title">Аудит моделей</h3>
+          <p data-i18n="svc.07.text">Проверяем модели на соответствие стандартам, коллизии в Navisworks и правила наименования до сдачи заказчику.</p>
           <div class="service-tags"><span>AUDIT</span><span>QA/QC</span></div>
         </article>
 
         <article class="service-card">
           <span class="tick-bl"></span><span class="tick-br"></span>
           <span class="service-index">08</span>
-          <h3>База семейств и шаблонов</h3>
-          <p>Передаём готовую библиотеку: семейства Revit, шаблоны проектов и регламенты — старт не с нуля, а на выверенной базе.</p>
+          <h3 data-i18n="svc.08.title">База семейств и шаблонов</h3>
+          <p data-i18n="svc.08.text">Готовая библиотека + разработка семейств. Создание шаблонов проектов на выверенной базе.</p>
           <div class="service-tags"><span>FAMILIES</span><span>ШАБЛОНЫ</span><span>РЕГЛАМЕНТЫ</span></div>
         </article>
 
@@ -521,40 +538,40 @@
   <section id="process">
     <div class="container">
       <div class="section-head" data-reveal>
-        <div class="eyebrow">Процесс // как мы работаем</div>
-        <h2>Дорожная карта внедрения</h2>
-        <p>Ведём проект по пяти понятным этапам — от аудита текущих процессов до постоянного сопровождения. На каждом шаге фиксируем результат и сроки, прежде чем двигаться дальше.</p>
+        <div class="eyebrow" data-i18n="process.eyebrow">Процесс // как мы работаем</div>
+        <h2 data-i18n="process.title">Дорожная карта внедрения</h2>
+        <p data-i18n="process.sub">Ведём проект по пяти понятным этапам — от аудита текущих процессов до постоянного сопровождения. На каждом шаге фиксируем результат и сроки, прежде чем двигаться дальше.</p>
       </div>
 
       <div class="process-track" data-reveal>
         <div class="process-step">
           <div class="num">1</div>
-          <h3>Аудит</h3>
-          <p>Смотрим текущие модели и процессы, оцениваем уровень BIM-зрелости.</p>
+          <h3 data-i18n="process.1.title">Обучение</h3>
+          <p data-i18n="process.1.text">Вводим команду в процесс и закрепляем регламент на практике.</p>
           <div class="process-line"></div>
         </div>
         <div class="process-step">
           <div class="num">2</div>
-          <h3>Стандарт</h3>
-          <p>Фиксируем BEP, EIR, LOD и регламент наименования.</p>
+          <h3 data-i18n="process.2.title">Аудит</h3>
+          <p data-i18n="process.2.text">Смотрим текущие модели и процессы, оцениваем уровень BIM-зрелости.</p>
           <div class="process-line"></div>
         </div>
         <div class="process-step">
           <div class="num">3</div>
-          <h3>Софт и CDE</h3>
-          <p>Настраиваем инструменты, шаблоны и единую среду данных.</p>
+          <h3 data-i18n="process.3.title">Софт и CDE</h3>
+          <p data-i18n="process.3.text">Настраиваем инструменты, шаблоны и единую среду данных.</p>
           <div class="process-line"></div>
         </div>
         <div class="process-step">
           <div class="num">4</div>
-          <h3>Обучение</h3>
-          <p>Вводим команду в процесс и закрепляем регламент на практике.</p>
+          <h3 data-i18n="process.4.title">Стандарт</h3>
+          <p data-i18n="process.4.text">Фиксируем BEP, EIR, LOD и регламент наименования.</p>
           <div class="process-line"></div>
         </div>
         <div class="process-step">
           <div class="num">5</div>
-          <h3>Сопровождение</h3>
-          <p>Консалтинг и развитие 4D/5D-процессов на постоянной основе.</p>
+          <h3 data-i18n="process.5.title">Сопровождение</h3>
+          <p data-i18n="process.5.text">Консалтинг и развитие 4D/5D-процессов на постоянной основе.</p>
           <div class="process-line"></div>
         </div>
       </div>
@@ -566,74 +583,74 @@
   <section id="faq">
     <div class="container">
       <div class="section-head" data-reveal>
-        <div class="eyebrow">FAQ // вопросы</div>
-        <h2>Частые вопросы</h2>
+        <div class="eyebrow" data-i18n="faq.eyebrow">FAQ // вопросы</div>
+        <h2 data-i18n="faq.title">Частые вопросы</h2>
       </div>
 
       <div class="faq-list" data-reveal>
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false" aria-controls="faq-a-1" id="faq-q-1">
             <span class="faq-index">01</span>
-            <span class="faq-text">С чего начинается работа с Start BIM?</span>
+            <span class="faq-text" data-i18n="faq.1.q">С чего начинается работа с Start BIM?</span>
             <span class="faq-icon"></span>
           </button>
           <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
-            <div class="faq-a-inner"><p>С аудита: смотрим текущие процессы и уровень BIM-зрелости — даже если компания ещё ни разу не работала в Revit и переходит на BIM с нуля. По итогам предлагаем дорожную карту с конкретными шагами и сроками.</p></div>
+            <div class="faq-a-inner"><p data-i18n="faq.1.a">С аудита: смотрим текущие процессы и уровень BIM-зрелости — даже если компания ещё ни разу не работала в Revit и переходит на BIM с нуля. По итогам предлагаем дорожную карту с конкретными шагами и сроками.</p></div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2" id="faq-q-2">
             <span class="faq-index">02</span>
-            <span class="faq-text">Нужно ли менять софт, если уже работаем в Revit?</span>
+            <span class="faq-text" data-i18n="faq.2.q">Нужно ли менять софт, если уже работаем в Revit?</span>
             <span class="faq-icon"></span>
           </button>
           <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
-            <div class="faq-a-inner"><p>Нет. Чаще всего донастраиваем существующий стек — шаблоны, семейства, регламенты обмена IFC — без миграции на новые инструменты.</p></div>
+            <div class="faq-a-inner"><p data-i18n="faq.2.a">Нет. Чаще всего донастраиваем существующий стек — шаблоны, семейства, регламенты обмена IFC — без миграции на новые инструменты.</p></div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false" aria-controls="faq-a-3" id="faq-q-3">
             <span class="faq-index">03</span>
-            <span class="faq-text">Что такое BEP и EIR и зачем они нужны?</span>
+            <span class="faq-text" data-i18n="faq.3.q">Что такое BEP и EIR и зачем они нужны?</span>
             <span class="faq-icon"></span>
           </button>
           <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
-            <div class="faq-a-inner"><p>BEP (BIM Execution Plan) описывает, как ведётся BIM на проекте. EIR (Employer's Information Requirements) — что именно требует заказчик. Мы разрабатываем оба документа под ваш проект.</p></div>
+            <div class="faq-a-inner"><p data-i18n="faq.3.a">BEP (BIM Execution Plan) описывает, как ведётся BIM на проекте. EIR (Employer's Information Requirements) — что именно требует заказчик. Мы разрабатываем оба документа под ваш проект.</p></div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false" aria-controls="faq-a-4" id="faq-q-4">
             <span class="faq-index">04</span>
-            <span class="faq-text">Работаете ли вы с небольшими проектными командами?</span>
+            <span class="faq-text" data-i18n="faq.4.q">Работаете ли вы с небольшими проектными командами?</span>
             <span class="faq-icon"></span>
           </button>
           <div class="faq-a" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
-            <div class="faq-a-inner"><p>Да. Адаптируем объём внедрения под размер команды — от одного отдела до всей проектной организации.</p></div>
+            <div class="faq-a-inner"><p data-i18n="faq.4.a">Да. Адаптируем объём внедрения под размер команды — от одного отдела до всей проектной организации.</p></div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false" aria-controls="faq-a-5" id="faq-q-5">
             <span class="faq-index">05</span>
-            <span class="faq-text">Сколько занимает внедрение?</span>
+            <span class="faq-text" data-i18n="faq.5.q">Сколько занимает внедрение?</span>
             <span class="faq-icon"></span>
           </button>
           <div class="faq-a" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
-            <div class="faq-a-inner"><p>От регламента и обучения (4–6 недель) до полного цикла с CDE-платформой (3–6 месяцев) — зависит от масштаба команды.</p></div>
+            <div class="faq-a-inner"><p data-i18n="faq.5.a">От регламента и обучения (4–6 недель) до полного цикла с CDE-платформой (3–6 месяцев) — зависит от масштаба команды.</p></div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false" aria-controls="faq-a-6" id="faq-q-6">
             <span class="faq-index">06</span>
-            <span class="faq-text">Что входит в аудит моделей?</span>
+            <span class="faq-text" data-i18n="faq.6.q">Что входит в аудит моделей?</span>
             <span class="faq-icon"></span>
           </button>
           <div class="faq-a" id="faq-a-6" role="region" aria-labelledby="faq-q-6">
-            <div class="faq-a-inner"><p>Проверка на соответствие LOD, коллизии, регламент наименования и требования EIR — до сдачи моделей заказчику.</p></div>
+            <div class="faq-a-inner"><p data-i18n="faq.6.a">Проверка на соответствие LOD, коллизии, регламент наименования и требования EIR — до сдачи моделей заказчику.</p></div>
           </div>
         </div>
       </div>
@@ -643,11 +660,11 @@
   <section class="cta-band" id="contact">
     <div class="grid-frame" aria-hidden="true"></div>
     <div class="container cta-inner" data-reveal>
-      <div class="eyebrow">Контакты</div>
-      <h2 style="margin-top:16px;">Готовы внедрить BIM по чертежу?</h2>
-      <p>Опишите проект и текущий стек — за один созвон соберём предварительный roadmap внедрения.</p>
+      <div class="eyebrow" data-i18n="cta.eyebrow">Контакты</div>
+      <h2 style="margin-top:16px;" data-i18n="cta.title">Готовы внедрить BIM по чертежу?</h2>
+      <p data-i18n="cta.sub">Опишите проект и текущий стек — за один созвон соберём предварительный roadmap внедрения.</p>
       <div class="cta-row">
-        <a href="#contact" class="btn btn-primary js-open-contact">Оставить заявку <span class="btn-arrow">→</span></a>
+        <a href="#contact" class="btn btn-primary js-open-contact" data-i18n="cta.btn">Оставить заявку <span class="btn-arrow">→</span></a>
         <a href="mailto:bimstart1@gmail.com" class="btn btn-ghost">bimstart1@gmail.com</a>
       </div>
     </div>
@@ -658,18 +675,18 @@
   <div class="container footer-top">
     <div class="footer-brand">
       <span class="logo-word">START <b style="color:var(--accent-text);">BIM</b></span>
-      <p>Внедрение BIM/ТИМ для проектных организаций: от стандарта до модели.</p>
+      <p data-i18n="footer.tagline">Внедрение BIM/ТИМ для проектных организаций: от стандарта до модели.</p>
     </div>
     <div class="footer-col">
-      <h4>Разделы</h4>
+      <h4 data-i18n="footer.sections">Разделы</h4>
       <ul>
-        <li><a href="#services">Услуги</a></li>
-        <li><a href="#process">Процесс</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#services" data-i18n="nav.services">Услуги</a></li>
+        <li><a href="#process" data-i18n="nav.process">Процесс</a></li>
+        <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Связь</h4>
+      <h4 data-i18n="footer.contact">Связь</h4>
       <ul>
         <li><a href="#contact">Telegram</a></li>
         <li><a href="#contact">Instagram</a></li>
@@ -688,28 +705,120 @@
     <button class="modal-close" id="modal-close" aria-label="Закрыть форму">✕</button>
 
     <div id="modal-form-view">
-      <div class="eyebrow">Заявка // новый проект</div>
-      <h3 id="modal-title">Обсудим внедрение BIM</h3>
-      <p class="modal-intro">Оставьте имя и контакт — перезвоним или напишем в течение рабочего дня.</p>
+      <div class="eyebrow" data-i18n="modal.eyebrow">Заявка // новый проект</div>
+      <h3 id="modal-title" data-i18n="modal.title">Обсудим внедрение BIM</h3>
+      <p class="modal-intro" data-i18n="modal.intro">Оставьте имя и контакт — перезвоним или напишем в течение рабочего дня.</p>
       <form id="contact-form">
-        <label class="field"><span>Имя *</span><input type="text" name="name" required autocomplete="name"></label>
-        <label class="field"><span>Телефон или почта *</span><input type="text" name="contact" required autocomplete="tel" placeholder="+7 999 000-00-00 или you@company.ru"></label>
-        <p class="modal-note">Отправляя форму, вы соглашаетесь на обработку контактных данных для связи по заявке.</p>
-        <button type="submit" class="btn btn-primary">Отправить заявку <span class="btn-arrow">→</span></button>
+        <label class="field"><span data-i18n="modal.name">Имя *</span><input type="text" name="name" required autocomplete="name"></label>
+        <label class="field"><span data-i18n="modal.contactField">Телефон или почта *</span><input type="text" name="contact" required autocomplete="tel" placeholder="+7 999 000-00-00 или you@company.ru"></label>
+        <p class="modal-note" data-i18n="modal.note">Отправляя форму, вы соглашаетесь на обработку контактных данных для связи по заявке.</p>
+        <button type="submit" class="btn btn-primary" data-i18n="modal.submit">Отправить заявку <span class="btn-arrow">→</span></button>
       </form>
     </div>
 
     <div class="modal-success" id="modal-success" hidden>
-      <div class="eyebrow">Заявка // отправлена</div>
-      <h3>Спасибо, заявка принята.</h3>
-      <p class="modal-intro">Мы свяжемся с вами в течение рабочего дня по указанному контакту.</p>
-      <button type="button" class="btn btn-ghost" id="modal-success-close">Закрыть</button>
+      <div class="eyebrow" data-i18n="modal.doneEyebrow">Заявка // отправлена</div>
+      <h3 data-i18n="modal.doneTitle">Спасибо, заявка принята.</h3>
+      <p class="modal-intro" data-i18n="modal.doneIntro">Мы свяжемся с вами в течение рабочего дня по указанному контакту.</p>
+      <button type="button" class="btn btn-ghost" id="modal-success-close" data-i18n="modal.doneClose">Закрыть</button>
     </div>
   </div>
 </div>
 
 <script>
 (function(){
+  /* ---------- i18n ---------- */
+  var translations = {
+    en: {
+      "nav.services":"Services", "nav.process":"Process", "nav.faq":"FAQ", "nav.contact":"Contact",
+      "nav.contactBtn":"Contact", "nav.cta":"Discuss a project <span class=\"btn-arrow\">→</span>",
+      "hero.eyebrow":"BIM FOR DESIGN & ENGINEERING FIRMS",
+      "hero.title":"From standard to model — <em>the whole path</em> of BIM adoption.",
+      "hero.sub":"Start BIM builds the full transition to BIM: standards, software, a CDE environment, team training and consulting at every stage. Eight service lines, one contractor.",
+      "hero.ctaPrimary":"Discuss a project <span class=\"btn-arrow\">→</span>",
+      "hero.ctaGhost":"View services",
+      "services.eyebrow":"Services // 01–08",
+      "services.title":"Eight service lines, one rollout",
+      "services.sub":"Every company enters BIM from a different point — some start with a standard, others with software. We cover the whole path, from document to algorithm.",
+      "svc.01.title":"BIM standards",
+      "svc.01.text":"We develop BEP, EIR, LOD and a model naming convention — one set of rules the whole team works by.",
+      "svc.02.title":"Software & rollout",
+      "svc.02.text":"We configure Revit and Navisworks, templates, families, a collision matrix and IFC exchange for the tasks of a specific department.",
+      "svc.03.title":"CDE platforms",
+      "svc.03.text":"We build a common data environment: server, folder structure, access rights and the model approval workflow.",
+      "svc.04.title":"4D | 5D BIM",
+      "svc.04.text":"We link the model to schedule and cost — timelines and quantities are calculated straight from the model.",
+      "svc.05.title":"Consulting & roadmap",
+      "svc.05.text":"We build an implementation roadmap — from your current BIM maturity level to a target process model.",
+      "svc.06.title":"Training",
+      "svc.06.text":"We teach designers and managers to work under the new standards — with ongoing support, not a one-off session.",
+      "svc.07.title":"Model audit",
+      "svc.07.text":"We check models for standards compliance, run clash detection in Navisworks and verify naming rules before handover to the client.",
+      "svc.08.title":"Families & template library",
+      "svc.08.text":"A ready-made library plus custom family development. Project templates built on a validated base.",
+      "process.eyebrow":"Process // how we work",
+      "process.title":"Implementation roadmap",
+      "process.sub":"We run the project through five clear stages — from an audit of current processes to ongoing support. At every step we fix the result and the timeline before moving on.",
+      "process.1.title":"Training", "process.1.text":"We bring the team into the process and reinforce the standard in practice.",
+      "process.2.title":"Audit", "process.2.text":"We review current models and processes and assess your BIM maturity level.",
+      "process.3.title":"Software & CDE", "process.3.text":"We set up tools, templates and a common data environment.",
+      "process.4.title":"Standard", "process.4.text":"We define the BEP, EIR, LOD and naming convention.",
+      "process.5.title":"Support", "process.5.text":"Ongoing consulting and development of 4D/5D processes.",
+      "faq.eyebrow":"FAQ // questions", "faq.title":"Frequently asked questions",
+      "faq.1.q":"How does working with Start BIM begin?",
+      "faq.1.a":"With an audit: we look at current processes and BIM maturity — even if the company has never worked in Revit and is starting BIM from zero. Based on the results we propose a roadmap with concrete steps and timelines.",
+      "faq.2.q":"Do we need to change software if we already work in Revit?",
+      "faq.2.a":"No. In most cases we reconfigure your existing stack — templates, families, IFC exchange rules — without migrating to new tools.",
+      "faq.3.q":"What are BEP and EIR, and why do we need them?",
+      "faq.3.a":"The BEP (BIM Execution Plan) describes how BIM is run on the project. The EIR (Employer's Information Requirements) states exactly what the client requires. We develop both documents for your project.",
+      "faq.4.q":"Do you work with small design teams?",
+      "faq.4.a":"Yes. We scale the rollout to the size of the team — from a single department to the whole design organization.",
+      "faq.5.q":"How long does the rollout take?",
+      "faq.5.a":"From a standard and training (4–6 weeks) to a full cycle with a CDE platform (3–6 months) — it depends on the scale of the team.",
+      "faq.6.q":"What does a model audit include?",
+      "faq.6.a":"Checking compliance with LOD, clash detection, the naming convention and EIR requirements — before models are handed over to the client.",
+      "cta.eyebrow":"Contact", "cta.title":"Ready to build BIM to the blueprint?",
+      "cta.sub":"Describe your project and current stack — in one call we'll put together a preliminary implementation roadmap.",
+      "cta.btn":"Leave a request <span class=\"btn-arrow\">→</span>",
+      "footer.tagline":"BIM adoption for design and engineering organizations: from standard to model.",
+      "footer.sections":"Sections", "footer.contact":"Contact",
+      "modal.eyebrow":"Request // new project", "modal.title":"Let's discuss your BIM rollout",
+      "modal.intro":"Leave your name and contact — we'll call or write back within one business day.",
+      "modal.name":"Name *", "modal.contactField":"Phone or email *",
+      "modal.note":"By submitting the form you agree to the processing of your contact details for the purpose of this request.",
+      "modal.submit":"Send request <span class=\"btn-arrow\">→</span>",
+      "modal.doneEyebrow":"Request // sent", "modal.doneTitle":"Thank you, your request has been received.",
+      "modal.doneIntro":"We will contact you within one business day using the details provided.",
+      "modal.doneClose":"Close"
+    }
+  };
+
+  var ruDefaults = {};
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    ruDefaults[el.getAttribute('data-i18n')] = el.innerHTML;
+  });
+
+  function applyLang(lang){
+    var dict = lang === 'en' ? translations.en : ruDefaults;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('.js-lang').forEach(function(btn){
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+    try{ localStorage.setItem('startbim-lang', lang); }catch(e){}
+  }
+
+  var savedLang = 'ru';
+  try{ savedLang = localStorage.getItem('startbim-lang') || 'ru'; }catch(e){}
+  if(savedLang === 'en') applyLang('en');
+
+  document.querySelectorAll('.js-lang').forEach(function(btn){
+    btn.addEventListener('click', function(){ applyLang(btn.getAttribute('data-lang')); });
+  });
+
   var header = document.getElementById('site-header');
   window.addEventListener('scroll', function(){
     header.classList.toggle('scrolled', window.scrollY > 8);
@@ -859,7 +968,7 @@
     var ctx = canvas.getContext('2d');
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var W, H;
-    var spokes = ['BEP', 'EIR', 'LOD', 'REVIT', 'CDE', '4D/5D', 'AUDIT'];
+    var spokes = ['CDE', 'Стандарт', 'СОФТ', 'ROADMAP', 'Обучение', 'Консалтинг', 'Моделирование'];
 
     function resize(){
       var rect = canvas.parentElement.getBoundingClientRect();
@@ -883,9 +992,10 @@
       ctx.clearRect(0,0,W,H);
       var cx = W*.5, cy = H*.5;
       var min = Math.min(W,H);
-      var ringR = min*.44;
+      var ringR = min*.36;
       var hubR = Math.max(min*.11, 34);
-      var nodeR = min*.42;
+      var nodeR = min*.27;
+      var labelFont = Math.max(8, Math.min(11, min*0.02));
 
       // slow-rotating construction ring, drafting-compass style
       var angleOffset = reduceMotion ? 0 : t*0.0016;
@@ -951,12 +1061,12 @@
         ctx.fill();
         ctx.globalAlpha = 1;
 
-        ctx.font = '500 11px "IBM Plex Mono", monospace';
+        ctx.font = '500 ' + labelFont + 'px "IBM Plex Mono", monospace';
         ctx.fillStyle = ink;
         ctx.globalAlpha = .7;
-        var lx = n.x < cx - 4 ? n.x - 10 : (Math.abs(n.x-cx) <= 4 ? n.x : n.x + 10);
+        var lx = n.x < cx - 4 ? n.x - 8 : (Math.abs(n.x-cx) <= 4 ? n.x : n.x + 8);
         ctx.textAlign = n.x < cx - 4 ? 'right' : (Math.abs(n.x-cx) <= 4 ? 'center' : 'left');
-        var ly = n.y <= cy ? n.y - 10 : n.y + 16;
+        var ly = n.y <= cy ? n.y - 10 : n.y + 15;
         ctx.textBaseline = 'middle';
         ctx.fillText(n.key, lx, ly);
         ctx.globalAlpha = 1;
